@@ -21,10 +21,6 @@ export var UserSchema: Schema = new Schema({
         password:{
             required:true,
             type: String
-        },
-        userType:{
-            required:true,
-            type:String
         }
     },{
         timestamps: true,
@@ -33,5 +29,6 @@ export var UserSchema: Schema = new Schema({
   UserSchema.methods.fullName = () => {
     return (this.firstName.trim() + " " + this.lastName.trim());
   };
-
-  export const User: Model<IUserModel> = model<IUserModel>("User", UserSchema);
+  
+  const User: Model<IUserModel> = model<IUserModel>("User", UserSchema);
+  export default User;

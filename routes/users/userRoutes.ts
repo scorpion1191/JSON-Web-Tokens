@@ -1,21 +1,17 @@
 import {Request, Response} from "express";
-import {User} from '../../models/users/userModel'
+import User from '../../models/users/userModel'
+import {authController} from "../../controllers/security/authController"
 
-
-class userRoutes {       
+export class userRoutes {       
     public routes(app): void {  
         // RETURNS ALL THE USERS IN THE DATABASE        
-        app.route('/getAllUsers').get((req: Request, res: Response) => {            
-            User.find({}, function (err, users) {
-                if (err)
-                     return res.status(500).send("There was a problem finding the users.");
-                res.status(200).send(users);
-            });
-        });     
+        app.route('/verification').post(authController.verifyApiToken,(req:Request, res:Response) => {
+            res.status(200).send({
+                message: 'API authentication successfully done'
+            })
+        });    
     }
 }
 
-
-export default new userRoutes();
 
 

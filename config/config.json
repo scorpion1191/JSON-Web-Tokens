@@ -1,9 +1,8 @@
 {
     "database":{
-        "userName":"admin",
-        "password":"admin",
         "connection":{
-            "host":"dburl"
+            "host":"dbURL"
         }
-    }
+    },
+    "port":3000
 }

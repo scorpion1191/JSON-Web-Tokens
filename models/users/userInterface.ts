@@ -3,5 +3,4 @@ export interface IUser {
     firstName : string;
     lastName : string;
     password: String;
-    userType: String;
 }
