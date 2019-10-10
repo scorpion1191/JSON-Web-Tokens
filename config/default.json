@@ -1,0 +1,14 @@
+{
+    "database":{
+        "dialectOptions":{"ssl":false},
+        "pool":{"max":5,"min":0,"idle":10000},
+        "database":"ivohobzt",
+        "username":"ivohobzt",
+        "dialect":"postgres",
+        "quoteIdentifiers":false,
+        "host":"salt.db.elephantsql.com",
+        "password":"s4mLWRxPw9P4hVEXqKO2Mbr7CdiMqm4P"
+    },
+    "port":5000
+}
+

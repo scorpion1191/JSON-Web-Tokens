@@ -1,17 +1,21 @@
-import * as mongoose from 'mongoose';
+import {Sequelize} from 'sequelize-typescript';
+import * as config from 'config';
 
-export class dbController {
-    public static connectDb(dbURL){
-        mongoose.connect(dbURL,{
-            keepAlive : true,
-            connectTimeoutMS:30000,
-            useNewUrlParser: true
-        });
+let dbConfig : any = config.get('database');
+let webDataSource = null;
 
-        mongoose.connection.on('error',console.error.bind(console,'Connection Error'));
-
-        mongoose.connection.once('open',()=>{
-            console.log('connected to database');
-        })
-    }
+export function getDataSource() {
+        if(!webDataSource) {
+            webDataSource = new Sequelize({
+                "dialectOptions":{"ssl":false},
+                "pool":{"max":5,"min":0,"idle":10000},
+                "database":"ivohobzt",
+                "username":"ivohobzt",
+                "dialect":"postgres",
+                "quoteIdentifiers":false,
+                "host":"salt.db.elephantsql.com",
+                "password":"s4mLWRxPw9P4hVEXqKO2Mbr7CdiMqm4P"
+              });
+            }
+        return webDataSource;
 }

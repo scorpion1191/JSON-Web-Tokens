@@ -1,5 +1,8 @@
 import * as jwt from "jsonwebtoken";
 import * as fs from "fs";
+import * as dataSources from '../database/dbController';
+import {Op} from "sequelize";
+import { Users } from '../../models/userModel';
 const privateKEY  = fs.readFileSync('./private.key', 'utf8');
 export class authController{
     
@@ -25,5 +28,26 @@ export class authController{
             req.userId = decoded.id;
             next();
         });
+    }
+
+    public static async verifyUser(userName){
+        
+        let dataSource = dataSources.getDataSource();
+
+        if(dataSource) {
+
+            dataSource.addModels([Users]);
+            let andClause : any = [
+                {
+                    username: userName
+                }
+            ];
+            let query : any = {
+                where: { [Op.and]: andClause },
+                attributes:["userid","username","email","usertype","password"]
+            };
+
+            return await Users.findAll(query);
+        }
     }
 }
